@@ -100,10 +100,11 @@ const imageEl = createGallery(galleryItems);// вызываем функцию �
 refs.gallery.insertAdjacentHTML('afterbegin', imageEl.join(''));/*  с помощю метода insertAdjacentHTML 
                                                                     вставляем созданную разметку в нужное нам место */
 
-refs.gallery.addEventListener('click', openModal) //
+refs.gallery.addEventListener('click', openModal); //Отлавливаем клик на открытие модалки
 
+//открытие модального окна
 function openModal(event){
-   event.preventDefault();
+   event.preventDefault(); //снятие базовых функций с IMG
    if(event.target.nodeName !== 'IMG'){
      return;
    };
@@ -111,8 +112,7 @@ function openModal(event){
    refs.lightboxImg.src = event.target.dataset.source;
 };
 
- //
-
+//закрытие модального окна
 function closeModal(event){
   if(event.target.nodeName === 'IMG'){
     return;
@@ -120,15 +120,18 @@ function closeModal(event){
   refs.lightbox.classList.remove('is-open');
   refs.lightboxImg.src = '';
 }
-refs.lightbox.addEventListener('click', closeModal);
 
+refs.lightbox.addEventListener('click', closeModal); //Отлавливаем клик на закрытие модалки
+
+//закрытие модальнго окна кнопкой Esc
 document.addEventListener('keydown', function(e) {
-  if (event.key === 'Escape') {
+  if (e.key === 'Escape') {
     refs.lightbox.classList.remove('is-open');
     refs.lightboxImg.src = '';
   }
-  });
+});
 
+  //пролистывание в лево, право с кнопки
   // refs.lightbox.addEventListener('click', flipThrough);
 
   // function flipThrough(event){
